@@ -40,10 +40,10 @@ $('#enviomsj').keypress(function(e){
     if(e.which == 13){
         $(this).val('');
         $('#blanco').append('<div class="mensaje comment">'+mensaje+"</div>");
-				$('.comment').emoticonize({
+        $('#blanco').append('<span>'+hora+'</span>');
+		$('.comment').emoticonize({
 
-			        });
-        $('#blanco').append('<span>'+hora+'</span>')
+			});
 
         if(value==="1"){
           laboratoria.push(mensaje);
@@ -87,5 +87,17 @@ aldo.push(mensaje);
     else{
     }
 });
+$.expr[':'].icontains = function(obj, index, meta, stack){
+    return (obj.textContent || obj.innerText || jQuery(obj).text() || '').toLowerCase().indexOf(meta[3].toLowerCase()) >= 0;
+    };
+    $(document).ready(function(){
+        $('#buscador').keyup(function(){
+                     buscar = $(this).val();
+                     $('#lista li h4').removeClass('resaltar');
+                            if(jQuery.trim(buscar) != ''){
+                               $("#lista li h4:icontains('" + buscar + "')").addClass('resaltar');
+                            }
+            });
+    });
 
 });
